@@ -4,13 +4,16 @@
 
 ### Options
 
-- **duration** Duration in milliseconds of transition between slides
-- **startPosition** First (0 indexed) slide to show
-- **groupTogether** Groups sliders matching the selector together, so left/right controls are shared
+- **duration** Duration (in ms) of transition between slides. Default is 200ms.
+- **automatic** Enable/Disable automatic scrolling. Default is true. 
+- **delay** Delay (in ms) between automatically proceeding to next slide. Default is 4000ms.
+- **startPosition** First (0 indexed) slide to show. Default is 0.
+- **groupTogether** Groups sliders matching the selector together, so left/right controls are shared. Default is false.
+- **onTransition** Can pass a callback to be called after each transition.
 
 ### Sample mark-up
 
-    <div class="slider customiser-class-name">
+    <div class="slider">
         <div class="slides-wraper">
             <ul class="slides">
                 <li><img src="/1.jpg" alt="" /></li>
@@ -27,7 +30,11 @@
 
     $('.slider').slider({
         duration: 200,
-        startPosition: 2
+        delay: 4000,
+        startPosition: 2,
+        onTransition: function(position) {
+            console.log('New position is ' + position);
+        }
     });
 
 
