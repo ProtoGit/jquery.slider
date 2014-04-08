@@ -40,8 +40,13 @@
 
 ### Sample CSS
 
+    .slider {
+        position: relative;
+    }
+
     .slides-wrapper {
         overflow: hidden;
+        position: relative;
     }
 
     .slides {
@@ -53,7 +58,13 @@
 
     .slides li {
         display: inline-block;
+        zoom: 1;
+        *display: inline;
         margin-right: -3px; /* fixes inline-block whitespace issue */
+        *margin-right: 0;
+    }
+
+    .slides li * {
         white-space: normal;
     }
 
