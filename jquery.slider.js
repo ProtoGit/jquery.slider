@@ -13,6 +13,7 @@
         var startPosition = options.startPosition || 0;
         var groupTogether = options.groupTogether || false;
         var onTransition = options.onTransition || null;
+        var useInsideWrapper = options.useInsideWrapper || false;
         var automatic = (typeof options.automatic === 'undefined')
             ? true
             : options.automatic;
@@ -69,7 +70,13 @@
         }
 
         Slider.prototype.calculateMaxPosition = function() {
-            var width = parseInt(this.container.css('width'));
+            var width;
+            if(this.container.children('.wrapper').length > 0 && useInsideWrapper) {
+                width = parseInt(this.container.children('.wrapper').first().css('width'));
+            } else {
+                width = parseInt(this.container.css('width'));
+            }
+
             return parseInt(this.slideCount - (width / this.getSlideWidth()));
         }
 
