@@ -95,11 +95,11 @@
 
         function buildSlider(container) {
             var slider = new Slider(container);
-            container.find('.slide-left').on('click', function() {
+            container.find('.slide-left').click(function() {
                 slider.stopTimer();
                 slider.left();
             });
-            container.find('.slide-right').on('click', function() {
+            container.find('.slide-right').click(function() {
                 slider.stopTimer();
                 slider.right();
             });
