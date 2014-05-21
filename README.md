@@ -15,7 +15,7 @@
 ### Sample mark-up
 
     <div class="slider">
-        <div class="slides-wraper">
+        <div class="slides-wrapper">
             <ul class="slides">
                 <li><img src="/1.jpg" alt="" /></li>
                 <li><img src="/2.jpg" alt="" /></li>
