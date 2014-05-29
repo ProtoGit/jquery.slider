@@ -28,7 +28,7 @@
             this.slideCount = parseInt(this.slides.first().children().length);
             this.animating = false;
             this.maxPosition = this.calculateMaxPosition();
-            this.animate(startPosition);
+            this.move(startPosition);
             if (automatic) {
                 this.startTimer();
             }
@@ -36,32 +36,38 @@
 
         Slider.prototype.left = function() {
             if (this.position > 0) {
-                this.animate(this.position - 1);
+                this.move(this.position - 1);
             } else {
-                this.animate(this.maxPosition);
+                this.move(this.maxPosition);
             }
         }
 
         Slider.prototype.right = function() {
             if (this.position < this.maxPosition) {
-                this.animate(this.position + 1);
+                this.move(this.position + 1);
             } else {
-                this.animate(0);
+                this.move(0);
             }
         }
 
-        Slider.prototype.animate = function(position) {
-            if (!this.animating) {
+        Slider.prototype.move = function(position, forceImmediately) {
+            forceImmediately = (typeof forceImmediately !== 'undefined') ? forceImmediately : false;
+            if (!this.animating || forceImmediately) {
                 var self = this;
                 var leftValue = (position * this.getSlideWidth()) * -1;
                 this.position = position;
-                this.animating = true;
-                this.slides.stop().animate({left: leftValue}, duration, function() {
-                    self.animating = false;
-                    if (onTransition) {
-                        onTransition(position);
-                    }
-                });
+                if (forceImmediately) {
+                    this.slides.stop().css('left', leftValue);
+                    this.animating = false;
+                } else {
+                    this.animating = true;
+                    this.slides.stop().animate({left: leftValue}, duration, function() {
+                        self.animating = false;
+                        if (onTransition) {
+                            onTransition(position);
+                        }
+                    });
+                }
             }
         }
 
@@ -103,14 +109,17 @@
                 slider.stopTimer();
                 slider.right();
             });
+            return slider;
         }
 
         if (groupTogether) {
-            buildSlider($(this));
+            return buildSlider($(this));
         } else {
+            var sliders = [];
             this.each(function() {
-                buildSlider($(this));
+                sliders.push(buildSlider($(this)));
             });
+            return sliders;
         }
 
     };

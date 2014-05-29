@@ -12,6 +12,12 @@
 - **onTransition** Can pass a callback to be called after each transition.
 - **useInsideWrapper** Use a .wrapper class inside the main container for the width. Useful on fixed width sliders with a full width container.
 
+
+### Return value
+
+A single ``Slider`` instance is returned if the ``groupTogether`` option is false. If true then an array of instances are returned, one for each element in the jQuery collection.
+
+
 ### Sample mark-up
 
     <div class="slider">
@@ -29,7 +35,7 @@
 
 ### Sample JS
 
-    $('.slider').slider({
+    var slider = $('.slider').slider({
         duration: 200,
         delay: 4000,
         startPosition: 2,
