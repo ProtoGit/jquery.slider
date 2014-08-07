@@ -65,10 +65,7 @@ A single ``Slider`` instance is returned if the ``groupTogether`` option is fals
 
     .slides li {
         display: inline-block;
-        zoom: 1;
-        *display: inline;
         margin-right: -3px; /* fixes inline-block whitespace issue */
-        *margin-right: 0;
     }
 
     .slides li * {
