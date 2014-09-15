@@ -112,3 +112,11 @@ A single ``Slider`` instance is returned if the ``groupTogether`` option is fals
     .slide-right:hover {
         background-image: url('/images/arrows-highlighted.png');
     }
+
+### RequireJS
+
+This plug-in is AMD-compatible, you only need to stick it in your modules directory and reference it as normal:
+
+    define(['jquery', 'libs/jquery.slider'], function($) {
+        // ...
+    });
