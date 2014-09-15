@@ -24,10 +24,7 @@
         var startPosition = options.startPosition || 0;
         var groupTogether = options.groupTogether || false;
         var onTransition = options.onTransition || null;
-        var useInsideWrapper = options.useInsideWrapper || false;
-        var automatic = (typeof options.automatic === 'undefined')
-            ? true
-            : options.automatic;
+        var automatic = (typeof options.automatic === 'undefined') ? true : options.automatic;
 
         function Slider(container) {
             this.container = container;
@@ -36,14 +33,14 @@
 
         Slider.prototype.init = function() {
             this.slides = this.container.find('.slides');
-            this.slideCount = parseInt(this.slides.first().children().length);
+            this.slideCount = parseInt(this.slides.first().children().length, 10);
             this.animating = false;
             this.maxPosition = this.calculateMaxPosition();
             this.move(startPosition);
             if (automatic) {
                 this.startTimer();
             }
-        }
+        };
 
         Slider.prototype.left = function() {
             if (this.position > 0) {
@@ -51,7 +48,7 @@
             } else {
                 this.move(this.maxPosition);
             }
-        }
+        };
 
         Slider.prototype.right = function() {
             if (this.position < this.maxPosition) {
@@ -59,7 +56,7 @@
             } else {
                 this.move(0);
             }
-        }
+        };
 
         Slider.prototype.move = function(position, forceImmediately) {
             forceImmediately = (typeof forceImmediately !== 'undefined') ? forceImmediately : false;
@@ -80,35 +77,30 @@
                     });
                 }
             }
-        }
+        };
 
         Slider.prototype.getSlideWidth = function() {
-            return parseInt(this.slides.first().children().first().css('width'));
-        }
+            return parseInt(this.slides.first().children().first().css('width'), 10);
+        };
 
         Slider.prototype.calculateMaxPosition = function() {
-            var width;
-            if(this.container.children('.wrapper').length > 0 && useInsideWrapper) {
-                width = parseInt(this.container.children('.wrapper').first().css('width'));
-            } else {
-                width = parseInt(this.container.css('width'));
-            }
+            var width = parseInt(this.container.css('width'), 10);
 
-            return parseInt(this.slideCount - (width / this.getSlideWidth()));
-        }
+            return parseInt(this.slideCount - (width / this.getSlideWidth()), 10);
+        };
 
         Slider.prototype.startTimer = function() {
             var self = this;
             this.timer = setInterval(function() {
                 self.right();
             }, delay);
-        }
+        };
 
         Slider.prototype.stopTimer = function() {
             if (this.timer) {
                 clearInterval(this.timer);
             }
-        }
+        };
 
         function buildSlider(container) {
             var slider = new Slider(container);

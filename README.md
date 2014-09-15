@@ -10,7 +10,6 @@
 - **startPosition** First (0 indexed) slide to show. Default is 0.
 - **groupTogether** Groups sliders matching the selector together, so left/right controls are shared. Default is false.
 - **onTransition** Can pass a callback to be called after each transition.
-- **useInsideWrapper** Use a .wrapper class inside the main container for the width. Useful on fixed width sliders with a full width container.
 
 
 ### Return value
