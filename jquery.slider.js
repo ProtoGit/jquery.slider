@@ -33,7 +33,7 @@
 
         Slider.prototype.init = function() {
             this.slides = this.container.find('.slides');
-            this.slideCount = parseInt(this.slides.first().children().length, 10);
+            this.slideCount = this.calculateSlideCount();
             this.animating = false;
             this.maxPosition = this.calculateMaxPosition();
             this.move(startPosition);
@@ -83,10 +83,12 @@
             return parseInt(this.slides.first().children().first().css('width'), 10);
         };
 
-        Slider.prototype.calculateMaxPosition = function() {
-            var width = parseInt(this.container.css('width'), 10);
+        Slider.prototype.calculateSlideCount = function () {
+            return parseInt(this.slides.first().children().length, 10);
+        };
 
-            return parseInt(this.slideCount - (width / this.getSlideWidth()), 10);
+        Slider.prototype.calculateMaxPosition = function() {
+            return this.calculateSlideCount() - 1;
         };
 
         Slider.prototype.startTimer = function() {
